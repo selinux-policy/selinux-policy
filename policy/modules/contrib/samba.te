@@ -134,6 +134,13 @@ type samba_gpupdate_exec_t;
 application_domain(samba_gpupdate_t, samba_gpupdate_exec_t)
 role system_r types samba_gpupdate_t;
 
+type samba_bgqd_t;
+type samba_bgqd_exec_t;
+init_daemon_domain(samba_bgqd_t, samba_bgqd_exec_t)
+
+type samba_bgqd_var_run_t;
+files_pid_file(samba_bgqd_var_run_t)
+
 type smbcontrol_t;
 type smbcontrol_exec_t;
 application_domain(smbcontrol_t, smbcontrol_exec_t)
@@ -298,6 +305,37 @@ domtrans_pattern(winbind_rpcd_t, samba_gpupdate_exec_t, samba_gpupdate_t)
 
 optional_policy(`
 	certmonger_domtrans(samba_gpupdate_t)
+')
+
+########################################
+#
+# samba-bgqd local policy
+#
+
+permissive samba_bgqd_t;
+
+allow samba_bgqd_t self:netlink_route_socket r_netlink_socket_perms;
+allow samba_bgqd_t self:tcp_socket create_stream_socket_perms;
+allow samba_bgqd_t self:udp_socket create_socket_perms;
+allow samba_bgqd_t self:unix_dgram_socket create_socket_perms;
+
+read_files_pattern(samba_bgqd_t, samba_etc_t, samba_etc_t)
+allow samba_bgqd_t samba_log_t:dir create_dir_perms;
+manage_files_pattern(samba_bgqd_t, samba_log_t, samba_log_t)
+allow samba_bgqd_t samba_var_t:dir create_dir_perms;
+allow samba_bgqd_t samba_var_t:file map;
+manage_files_pattern(samba_bgqd_t, samba_var_t, samba_var_t)
+manage_sock_files_pattern(samba_bgqd_t, samba_var_t, samba_var_t)
+
+manage_files_pattern(samba_bgqd_t, samba_bgqd_var_run_t, samba_bgqd_var_run_t)
+files_pid_filetrans(samba_bgqd_t, samba_bgqd_var_run_t, file)
+
+kernel_dgram_send(samba_bgqd_t)
+
+corenet_tcp_connect_ipp_port(samba_bgqd_t)
+
+optional_policy(`
+	auth_read_passwd_file(samba_bgqd_t)
 ')
 
 ########################################
@@ -1326,10 +1364,13 @@ optional_policy(`
 allow smbd_t winbind_rpcd_t:process noatsecure;
 allow smbd_t winbind_rpcd_t:unix_stream_socket connectto;
 allow winbind_t winbind_rpcd_t:unix_stream_socket connectto;
+allow winbind_rpcd_t samba_bgqd_t:unix_dgram_socket sendto;
 allow winbind_rpcd_t nmbd_t:unix_dgram_socket sendto;
 allow winbind_rpcd_t smbd_t:unix_dgram_socket sendto;
 allow winbind_rpcd_t winbind_t:unix_dgram_socket sendto;
 allow winbind_rpcd_t winbind_t:unix_stream_socket connectto;
+
+allow winbind_rpcd_t samba_bgqd_var_run_t:file write_file_perms;
 
 samba_domtrans_winbind_rpcd(smbd_t)
 samba_domtrans_winbind_rpcd(winbind_t)
