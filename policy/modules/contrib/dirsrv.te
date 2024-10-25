@@ -189,6 +189,7 @@ allow dirsrv_snmp_t self:capability {  dac_read_search };
 allow dirsrv_snmp_t self:fifo_file rw_fifo_file_perms;
 
 rw_files_pattern(dirsrv_snmp_t, dirsrv_tmpfs_t, dirsrv_tmpfs_t)
+allow dirsrv_snmp_t dirsrv_tmpfs_t:file map;
 
 manage_files_pattern(dirsrv_snmp_t, dirsrv_var_run_t, dirsrv_var_run_t)
 
