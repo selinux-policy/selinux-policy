@@ -659,6 +659,10 @@ optional_policy(`
 ')
 
 optional_policy(`
+	mount_read_pid_files(systemd_networkd_t)
+')
+
+optional_policy(`
     sosreport_dbus_chat(systemd_networkd_t)
 ')
 
