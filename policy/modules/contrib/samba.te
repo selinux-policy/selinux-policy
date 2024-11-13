@@ -338,6 +338,10 @@ optional_policy(`
 	auth_read_passwd_file(samba_bgqd_t)
 ')
 
+optional_policy(`
+	sssd_read_public_files(samba_bgqd_t)
+')
+
 ########################################
 #
 # smbd Local policy
@@ -1370,6 +1374,9 @@ allow winbind_rpcd_t smbd_t:unix_dgram_socket sendto;
 allow winbind_rpcd_t winbind_t:unix_dgram_socket sendto;
 allow winbind_rpcd_t winbind_t:unix_stream_socket connectto;
 
+# accessing other samba services and their resources
+allow samba_bgqd_t winbind_rpcd_t:fifo_file write;
+allow winbind_rpcd_t samba_bgqd_exec_t:file exec_file_perms;
 allow winbind_rpcd_t samba_bgqd_var_run_t:file write_file_perms;
 
 samba_domtrans_winbind_rpcd(smbd_t)
