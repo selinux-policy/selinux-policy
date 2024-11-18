@@ -84,6 +84,10 @@ optional_policy(`
 	sysnet_dns_name_resolve(coreos_installer_t)
 ')
 
+optional_policy(`
+	udev_domtrans(coreos_installer_t)
+')
+
 ########################################
 #
 # coreos_boot_mount_generator
