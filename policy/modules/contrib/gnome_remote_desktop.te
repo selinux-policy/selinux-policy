@@ -63,6 +63,10 @@ optional_policy(`
 ')
 
 optional_policy(`
+	policykit_dbus_chat(gnome_remote_desktop_t)
+')
+
+optional_policy(`
 	systemd_login_list_pid_dirs(gnome_remote_desktop_t)
 	systemd_login_read_pid_files(gnome_remote_desktop_t)
 	systemd_read_logind_sessions_files(gnome_remote_desktop_t)
