@@ -688,6 +688,7 @@ optional_policy(`
 ')
 
 optional_policy(`
+	virt_dbus_chat_dbus(sysadm_t)
 	virt_stream_connect(sysadm_t)
 	virt_filetrans_home_content(sysadm_t)
 	virt_manage_pid_dirs(sysadm_t)
