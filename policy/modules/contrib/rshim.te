@@ -9,6 +9,9 @@ type rshim_t;
 type rshim_exec_t;
 init_daemon_domain(rshim_t, rshim_exec_t)
 
+type rshim_var_run_t;
+files_pid_file(rshim_var_run_t)
+
 type rshim_unit_file_t;
 systemd_unit_file(rshim_unit_file_t)
 
@@ -23,6 +26,9 @@ allow rshim_t self:process { fork };
 allow rshim_t self:system module_load;
 allow rshim_t self:unix_stream_socket create_stream_socket_perms;
 allow rshim_t self:netlink_kobject_uevent_socket getopt;
+
+manage_files_pattern(rshim_t, rshim_var_run_t, rshim_var_run_t)
+files_pid_filetrans(rshim_t, rshim_var_run_t, file)
 
 kernel_read_proc_files(rshim_t)
 
