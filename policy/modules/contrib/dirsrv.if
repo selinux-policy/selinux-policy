@@ -104,7 +104,23 @@ interface(`dirsrv_systemctl',`
 	ps_process_pattern($1, dirsrv_t)
 ')
 
+########################################
+## <summary>
+##	Allow domain to getattr dirsrv unit files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed to transition.
+##	</summary>
+## </param>
+#
+interface(`dirsrv_getattr_unit_files',`
+	gen_require(`
+		type dirsrv_unit_file_t;
+	')
 
+	allow $1 dirsrv_unit_file_t:file getattr_file_perms;
+')
 
 #######################################
 ## <summary>
