@@ -8,6 +8,7 @@ policy_module(bootupd, 1.0.0)
 type bootupd_t;
 type bootupd_exec_t;
 init_daemon_domain(bootupd_t, bootupd_exec_t)
+permissive bootupd_t;
 
 type bootupd_unit_file_t;
 systemd_unit_file(bootupd_unit_file_t)
