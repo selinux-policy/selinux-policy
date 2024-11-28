@@ -208,6 +208,8 @@ systemd_generator_template(systemd_fstab_generator)
 systemd_generator_template(systemd_getty_generator)
 # gpt-generator
 systemd_generator_template(systemd_gpt_generator)
+# import-generator
+systemd_generator_template(systemd_import_generator)
 # rc-local-generator
 systemd_generator_template(systemd_rc_local_generator)
 # ssh-generator
@@ -1379,6 +1381,9 @@ optional_policy(`
 
 ### systemd rc_local generator
 init_exec_script_files(systemd_rc_local_generator_t)
+
+### systemd import generator
+permissive systemd_import_generator_t;
 
 ### ssh generator
 allow systemd_ssh_generator_t self:vsock_socket create;
