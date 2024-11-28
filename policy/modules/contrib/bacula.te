@@ -140,6 +140,10 @@ sysnet_dns_name_resolve(bacula_t)
 userdom_home_manager(bacula_t)
 
 optional_policy(`
+	container_runtime_domtrans(bacula_t)
+')
+
+optional_policy(`
 	mysql_stream_connect(bacula_t)
 	mysql_tcp_connect(bacula_t)
 ')
