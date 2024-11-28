@@ -1299,6 +1299,7 @@ kernel_read_proc_files(systemd_generator)
 dev_write_kmsg(systemd_generator)
 files_map_read_etc_files(systemd_generator)
 fs_getattr_all_fs(systemd_generator)
+fs_getattr_nsfs_files(systemd_generator)
 fs_search_cgroup_dirs(systemd_generator)
 init_read_state(systemd_generator)
 
@@ -1309,6 +1310,7 @@ fs_read_efivarfs_files(systemd_bless_boot_generator_t)
 
 ### cryptsetup generator
 manage_dirs_pattern(systemd_cryptsetup_generator_t, systemd_fstab_generator_unit_file_t, systemd_fstab_generator_unit_file_t)
+
 manage_files_pattern(systemd_cryptsetup_generator_t, systemd_fstab_generator_unit_file_t, systemd_fstab_generator_unit_file_t)
 
 ### fstab generator
@@ -1529,6 +1531,7 @@ dev_read_urand(systemd_domain)
 
 fs_search_all(systemd_domain)
 fs_getattr_all_fs(systemd_domain)
+fs_getattr_nsfs_files(systemd_domain)
 
 files_read_etc_files(systemd_domain)
 files_read_etc_runtime_files(systemd_domain)
