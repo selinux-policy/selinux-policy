@@ -48,7 +48,7 @@ template(`screen_role_template',`
 
 	domtrans_pattern($3, screen_exec_t, $1_screen_t)
 	allow $3 $1_screen_t:process { signal sigchld };
-	dontaudit $3 $1_screen_t:unix_stream_socket { ioctl read write };
+	allow $3 $1_screen_t:unix_stream_socket { ioctl read write };
 	allow $1_screen_t $3:unix_stream_socket { connectto };
 	allow $1_screen_t $3:process signal;
     allow $3 screen_exec_t:file entrypoint;
@@ -98,6 +98,35 @@ template(`screen_role_template',`
 		fs_nfs_domtrans($1_screen_t, $3)
 	')
 ')
+
+#######################################
+## <summary>
+##	The admin role template for the screen module
+## </summary>
+## <param name="role_prefix">
+##	<summary>
+##	The prefix of the user role (e.g., user
+##	is the prefix for user_r).
+##	</summary>
+## </param>
+## <param name="user_role">
+##	<summary>
+##	The role associated with the user domain.
+##	</summary>
+## </param>
+## <param name="user_domain">
+##	<summary>
+##	The type of the user domain.
+##	</summary>
+## </param>
+#
+template(`screen_admin_role_template',`
+	screen_role_template($1, $2, $3)
+
+	userdom_admin_home_dir_filetrans($1_screen_t, screen_home_t, file, ".screenrc")
+	userdom_admin_home_dir_filetrans($1_screen_t, screen_home_t, file, ".tmux.conf")
+')
+
 
 #######################################
 ## <summary>

@@ -327,11 +327,6 @@ optional_policy(`
 ')
 
 optional_policy(`
-	djbdns_search_tinydns_keys(crond_t)
-	djbdns_link_tinydns_keys(crond_t)
-')
-
-optional_policy(`
 	locallogin_search_keys(crond_t)
 	locallogin_link_keys(crond_t)
 ')
@@ -509,8 +504,6 @@ files_read_var_files(system_cronjob_t)
 # for nscd:
 files_dontaudit_search_pids(system_cronjob_t)
 # Access other spool directories like
-# /var/spool/anacron and /var/spool/slrnpull.
-files_manage_generic_spool(system_cronjob_t)
 files_create_boot_flag(system_cronjob_t)
 
 mls_file_read_to_clearance(system_cronjob_t)

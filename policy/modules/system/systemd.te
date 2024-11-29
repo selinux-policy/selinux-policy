@@ -79,6 +79,9 @@ init_nnp_daemon_domain(systemd_networkd_t)
 type systemd_networkd_unit_file_t;
 systemd_unit_file(systemd_networkd_unit_file_t)
 
+type systemd_cache_t;
+files_type(systemd_cache_t)
+
 type systemd_networkd_var_lib_t;
 files_type(systemd_networkd_var_lib_t)
 
@@ -499,7 +502,7 @@ optional_policy(`
 allow systemd_machined_t self:capability { dac_read_search dac_override setgid sys_admin sys_chroot sys_ptrace kill };
 allow systemd_machined_t systemd_unit_file_t:service { status start stop };
 allow systemd_machined_t self:unix_dgram_socket create_socket_perms;
-allow systemd_machined_t self:cap_userns { setgid setuid sys_admin sys_chroot sys_ptrace };
+allow systemd_machined_t self:cap_userns { kill setgid setuid sys_admin sys_chroot sys_ptrace };
 
 manage_dirs_pattern(systemd_machined_t, systemd_machined_var_run_t, systemd_machined_var_run_t)
 manage_files_pattern(systemd_machined_t, systemd_machined_var_run_t, systemd_machined_var_run_t)
@@ -653,6 +656,10 @@ optional_policy(`
 
 optional_policy(`
 	logging_send_syslog_msg(systemd_networkd_t)
+')
+
+optional_policy(`
+	mount_read_pid_files(systemd_networkd_t)
 ')
 
 optional_policy(`
@@ -1384,7 +1391,7 @@ optional_policy(`
 init_read_script_files(systemd_sysv_generator_t)
 
 ### tpm2 generator
-dev_list_sysfs(systemd_tpm2_generator_t)
+dev_read_sysfs(systemd_tpm2_generator_t)
 
 ### zram generator
 allow systemd_zram_generator_t systemd_fstab_generator_unit_file_t:file write_file_perms;

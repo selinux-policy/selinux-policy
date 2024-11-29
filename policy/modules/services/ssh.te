@@ -317,6 +317,7 @@ optional_policy(`
 allow sshd_t self:netlink_route_socket r_netlink_socket_perms;
 allow sshd_t self:key { search link write };
 allow sshd_t self:process setcurrent;
+allow sshd_t self:vsock_socket rw_socket_perms;
 
 allow sshd_t sshd_keytab_t:file read_file_perms;
 
@@ -639,6 +640,8 @@ logging_send_audit_msgs(sshd_sandbox_t)
 #
 #  sshd [net] child local policy
 #
+
+allow sshd_net_t sshd_t:vsock_socket rw_socket_perms;
 
 allow sshd_t sshd_net_t:process signal;
 

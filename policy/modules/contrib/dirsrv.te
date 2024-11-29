@@ -106,6 +106,7 @@ list_dirs_pattern(dirsrv_t, dirsrv_share_t, dirsrv_share_t)
 kernel_read_network_state(dirsrv_t)
 kernel_read_system_state(dirsrv_t)
 kernel_read_kernel_sysctls(dirsrv_t)
+kernel_read_net_sysctls(dirsrv_t)
 kernel_dontaudit_search_fs_sysctl(dirsrv_t)
 
 corecmd_search_bin(dirsrv_t)
@@ -188,6 +189,7 @@ allow dirsrv_snmp_t self:capability {  dac_read_search };
 allow dirsrv_snmp_t self:fifo_file rw_fifo_file_perms;
 
 rw_files_pattern(dirsrv_snmp_t, dirsrv_tmpfs_t, dirsrv_tmpfs_t)
+allow dirsrv_snmp_t dirsrv_tmpfs_t:file map;
 
 manage_files_pattern(dirsrv_snmp_t, dirsrv_var_run_t, dirsrv_var_run_t)
 

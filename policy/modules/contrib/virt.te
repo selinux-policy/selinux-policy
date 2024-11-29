@@ -2129,6 +2129,10 @@ allow virtqemud_t virt_var_run_t:file map;
 allow virtqemud_t virtlogd_t:fifo_file rw_inherited_fifo_file_perms;
 allow virtqemud_t virtlogd_t:unix_stream_socket connectto;
 
+read_files_pattern(virtqemud_t, virsh_t, virsh_t)
+
+read_files_pattern(virtqemud_t, virtd_t, virtd_t)
+
 create_lnk_files_pattern(virtqemud_t, virt_etc_rw_t, virt_etc_rw_t)
 delete_lnk_files_pattern(virtqemud_t, virt_etc_rw_t, virt_etc_rw_t)
 
@@ -2194,6 +2198,7 @@ corenet_tcp_bind_vnc_port(virtqemud_t)
 
 dev_delete_urand(virtqemud_t)
 dev_read_cpuid(virtqemud_t)
+dev_read_sgx_vepc(virtqemud_t)
 dev_read_sysfs(virtqemud_t)
 dev_read_urand(virtqemud_t)
 dev_rw_vfio_dev(virtqemud_t)
@@ -2339,6 +2344,7 @@ manage_lnk_files_pattern(virtstoraged_t, virt_etc_rw_t, virt_etc_rw_t)
 
 kernel_get_sysvipc_info(virtstoraged_t)
 kernel_io_uring_use(virtstoraged_t)
+kernel_read_vm_sysctls(virtstoraged_t)
 
 corecmd_exec_bin(virtstoraged_t)
 
@@ -2558,6 +2564,7 @@ allow virt_dbus_t virt_var_run_t:dir search_dir_perms;
 allow virt_dbus_t virt_var_run_t:sock_file write_sock_file_perms;
 
 # ipc to other virt domains
+allow virt_dbus_t virtd_t:unix_stream_socket connectto;
 allow virt_dbus_t virtproxyd_t:unix_stream_socket connectto;
 allow virt_dbus_t virtqemud_t:unix_stream_socket connectto;
 allow virt_dbus_t virtqemud_var_run_t:sock_file write;

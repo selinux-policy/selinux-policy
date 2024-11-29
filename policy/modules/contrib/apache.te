@@ -991,6 +991,7 @@ optional_policy(`
 ')
 
 optional_policy(`
+	dirsrv_getattr_unit_files(httpd_t)
 	dirsrv_manage_config(httpd_t)
 	dirsrv_manage_log(httpd_t)
 	dirsrv_manage_var_run(httpd_t)

@@ -84,6 +84,10 @@ optional_policy(`
 	sysnet_dns_name_resolve(coreos_installer_t)
 ')
 
+optional_policy(`
+	udev_domtrans(coreos_installer_t)
+')
+
 ########################################
 #
 # coreos_boot_mount_generator
@@ -132,6 +136,7 @@ optional_policy(`
 
 kernel_read_proc_files(coreos_liveiso_autologin_generator_t)
 
+corecmd_exec_bin(coreos_liveiso_autologin_generator_t)
 corecmd_exec_shell(coreos_liveiso_autologin_generator_t)
 dev_write_kmsg(coreos_liveiso_autologin_generator_t)
 
