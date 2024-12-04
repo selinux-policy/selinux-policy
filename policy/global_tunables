@@ -159,4 +159,4 @@ gen_tunable(deny_bluetooth,false)
 ## Allow unconfined domain to create user_namespace.
 ## </p>
 ## </desc>
-gen_tunable(unconfined_domain_can_create_user_namespace, false)
+gen_tunable(unconfined_domain_can_create_user_namespace, true)
