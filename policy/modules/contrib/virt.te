@@ -405,6 +405,7 @@ userdom_read_all_users_state(svirt_t)
 # svirt_prot_exec local policy
 #
 
+allow svirt_tcg_t self:capability sys_rawio;
 allow svirt_tcg_t self:process { execmem execstack };
 allow svirt_tcg_t self:netlink_route_socket r_netlink_socket_perms;
 
