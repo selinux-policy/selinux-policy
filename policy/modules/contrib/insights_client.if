@@ -320,3 +320,25 @@ interface(`insights_client_write_tmp',`
 	files_search_tmp($1)
 	write_files_pattern($1, insights_client_tmp_t, insights_client_tmp_t)
 ')
+
+########################################
+## <summary>
+##	Allow explicit transition to insights_core_t domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed to transition.
+##	</summary>
+## </param>
+#
+interface(`insights_domtrans_core',`
+	gen_require(`
+		type insights_core_t;
+	')
+
+	allow $1 insights_core_t: process transition;
+	allow insights_core_t $1:fd use;
+	allow insights_core_t $1:fifo_file rw_file_perms;
+	allow insights_core_t $1:process sigchld;
+	allow insights_core_t $1:dir search_dir_perms;
+')
