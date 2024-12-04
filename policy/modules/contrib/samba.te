@@ -340,10 +340,12 @@ optional_policy(`
 
 optional_policy(`
 	cups_read_config(samba_bgqd_t)
+	cups_read_pid_files(samba_bgqd_t)
 ')
 
 optional_policy(`
 	sssd_read_public_files(samba_bgqd_t)
+	sssd_search_lib(samba_bgqd_t)
 ')
 
 ########################################
