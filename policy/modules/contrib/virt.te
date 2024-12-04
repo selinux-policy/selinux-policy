@@ -937,7 +937,9 @@ optional_policy(`
 #
 # virtlogd local policy
 #
+allow virtlogd_t self:capability kill;
 allow virtlogd_t virt_image_t:dir search_dir_perms;
+allow virtlogd_t svirt_t:process signal;
 
 # virtlogd is allowed to manage files it creates in /var/run/libvirt
 manage_files_pattern(virtlogd_t, virt_var_run_t, virtlogd_var_run_t)
