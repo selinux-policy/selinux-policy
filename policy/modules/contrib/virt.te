@@ -1758,7 +1758,7 @@ userdom_use_inherited_user_ptys(virt_bridgehelper_t)
 # virt_qemu_ga local policy
 #
 
-allow virt_qemu_ga_t self:capability { sys_admin sys_time sys_tty_config };
+allow virt_qemu_ga_t self:capability { dac_override dac_read_search sys_admin sys_time sys_tty_config };
 
 allow virt_qemu_ga_t self:passwd passwd;
 
