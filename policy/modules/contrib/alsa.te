@@ -84,6 +84,7 @@ dev_getattr_fs(alsa_t)
 dev_read_sound(alsa_t)
 dev_rw_sysfs(alsa_t)
 dev_read_urand(alsa_t)
+dev_watch_generic_dirs(alsa_t)
 dev_write_sound(alsa_t)
 
 files_search_var_lib(alsa_t)
