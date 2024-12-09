@@ -484,6 +484,7 @@ files_mountpoint(container_ro_file_t)
 # svirt local policy
 #
 
+allow svirt_t self:capability sys_rawio;
 allow svirt_t self:process ptrace;
 
 allow svirt_t self:netlink_rdma_socket create_socket_perms;
