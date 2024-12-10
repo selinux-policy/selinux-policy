@@ -2127,6 +2127,8 @@ allow virtqemud_t virt_cache_t:file { relabelfrom relabelto };
 
 allow virtqemud_t virt_driver_domain:unix_stream_socket connectto;
 
+allow virtqemud_t virt_var_lib_t:file relabelfrom;
+
 allow virtqemud_t virt_var_run_t:dir relabelfrom;
 allow virtqemud_t virt_var_run_t:file map;
 
