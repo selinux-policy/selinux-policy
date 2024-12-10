@@ -2232,6 +2232,8 @@ init_stream_connect_script(virtqemud_t)
 
 selinux_compute_create_context(virtqemud_t)
 
+storage_rw_inherited_fixed_disk_dev(virtqemud_t)
+
 sysnet_exec_ifconfig(virtqemud_t)
 sysnet_manage_config(virtqemud_t)
 
