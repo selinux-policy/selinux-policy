@@ -123,7 +123,7 @@
 /dev/rmidi.*		-c	gen_context(system_u:object_r:sound_device_t,s0)
 /dev/radeon		-c	gen_context(system_u:object_r:dri_device_t,s0)
 /dev/kfd		-c	gen_context(system_u:object_r:hsa_device_t,s0)
-/dev/radio.*		-c	gen_context(system_u:object_r:v4l_device_t,s0)
+/dev/radio[0-9]+	-c	gen_context(system_u:object_r:v4l_device_t,s0)
 /dev/random		-c	gen_context(system_u:object_r:random_device_t,s0)
 /dev/raw1394.*		-c	gen_context(system_u:object_r:v4l_device_t,s0)
 /dev/rfkill		-c	gen_context(system_u:object_r:wireless_device_t,s0)
@@ -171,12 +171,12 @@ ifdef(`distro_suse', `
 /dev/vhost-net		-c	gen_context(system_u:object_r:vhost_device_t,s0)
 /dev/vhost-vdpa-[0-9]+		-c	gen_context(system_u:object_r:vhost_device_t,s0)
 /dev/vhost-vsock		-c	gen_context(system_u:object_r:vhost_device_t,s0)
-/dev/vbi.*		-c	gen_context(system_u:object_r:v4l_device_t,s0)
+/dev/vbi[0-9]+		-c	gen_context(system_u:object_r:v4l_device_t,s0)
 /dev/vbox.*		-c	gen_context(system_u:object_r:xserver_misc_device_t,s0)
 /dev/vga_arbiter	-c	gen_context(system_u:object_r:xserver_misc_device_t,s0)
 /dev/vmmon		-c	gen_context(system_u:object_r:vmware_device_t,s0)
 /dev/vmnet.*		-c	gen_context(system_u:object_r:vmware_device_t,s0)
-/dev/video.*		-c	gen_context(system_u:object_r:v4l_device_t,s0)
+/dev/video[0-9]+		-c	gen_context(system_u:object_r:v4l_device_t,s0)
 /dev/vrtpanel		-c	gen_context(system_u:object_r:mouse_device_t,s0)
 /dev/vttuner		-c	gen_context(system_u:object_r:v4l_device_t,s0)
 /dev/vtx.*		-c	gen_context(system_u:object_r:v4l_device_t,s0)
@@ -225,6 +225,7 @@ ifdef(`distro_suse', `
 /dev/pts(/.*)?			<<none>>
 
 /dev/s(ou)?nd/.*	-c	gen_context(system_u:object_r:sound_device_t,s0)
+/dev/swradio[0-9]+	-c	gen_context(system_u:object_r:v4l_device_t,s0)
 
 /dev/ss[0-9]+		-c	gen_context(system_u:object_r:gpfs_device_t,s0)
 
@@ -241,6 +242,8 @@ ifdef(`distro_suse', `
 
 /dev/vmbus/hv_vss		-c	gen_context(system_u:object_r:hypervvssd_device_t,s0)
 /dev/vmbus/hv_kvp		-c	gen_context(system_u:object_r:hypervkvp_device_t,s0)
+/dev/v4l-subdev[0-9]+	-c	gen_context(system_u:object_r:v4l_device_t,s0)
+/dev/v4l-touch[0-9]+	-c	gen_context(system_u:object_r:v4l_device_t,s0)
 
 /dev/wwan.+		-c	gen_context(system_u:object_r:modem_device_t,s0)
 
