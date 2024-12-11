@@ -2422,6 +2422,7 @@ interface(`xserver_filetrans_admin_home_content',`
 
 	optional_policy(`
 		gnome_cache_filetrans($1, xdm_home_t, dir, "xdm")
+		gnome_filetrans_admin_home_content($1)
 	')
 ')
 
