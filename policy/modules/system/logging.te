@@ -656,6 +656,7 @@ files_var_filetrans(syslogd_t, var_log_t, dir, "log")
 files_var_lib_filetrans(syslogd_t, syslogd_var_lib_t, { file dir })
 
 fs_getattr_all_fs(syslogd_t)
+fs_getattr_nsfs_files(syslogd_t)
 fs_read_efivarfs_files(syslogd_t)
 fs_search_auto_mountpoints(syslogd_t)
 fs_list_cgroup_dirs(syslogd_t)
