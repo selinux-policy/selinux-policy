@@ -526,6 +526,25 @@ interface(`mta_read_config',`
 
 ########################################
 ## <summary>
+##	Mmap mail server configuration.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`mta_map_config',`
+	gen_require(`
+		type etc_mail_t;
+	')
+
+	allow $1 etc_mail_t:file map;
+')
+
+########################################
+## <summary>
 ##	write mail server configuration.
 ## </summary>
 ## <param name="domain">
