@@ -46,6 +46,29 @@ interface(`storage_rw_inherited_fixed_disk_dev',`
 
 ########################################
 ## <summary>
+##	Allow the caller to read/write fixed disk
+##	device block files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	The domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`storage_rw_fixed_disk_blk_dev',`
+	gen_require(`
+		type fixed_disk_device_t;
+		attribute fixed_disk_raw_read;
+		attribute fixed_disk_raw_write;
+	')
+
+	allow $1 fixed_disk_device_t:blk_file read_blk_file_perms;
+	typeattribute $1 fixed_disk_raw_read;
+	typeattribute $1 fixed_disk_raw_write;
+')
+
+########################################
+## <summary>
 ##	Do not audit attempts made by the caller to get
 ##	the attributes of fixed disk device nodes.
 ## </summary>
