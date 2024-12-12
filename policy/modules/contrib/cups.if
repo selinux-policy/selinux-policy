@@ -124,7 +124,7 @@ interface(`cups_read_pid_files',`
 	')
 
 	files_search_pids($1)
-	allow $1 cupsd_var_run_t:file read_file_perms;
+	read_files_pattern($1, cupsd_var_run_t, cupsd_var_run_t)
 ')
 
 ########################################
