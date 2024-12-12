@@ -6143,6 +6143,42 @@ interface(`fs_rw_tmpfs_chr_files',`
 
 ########################################
 ## <summary>
+##	Create character nodes on tmpfs filesystems.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain to not audit.
+##	</summary>
+## </param>
+#
+interface(`fs_create_tmpfs_chr_blk_files',`
+	gen_require(`
+		type tmpfs_t;
+	')
+
+	allow $1 tmpfs_t:chr_file create_blk_file_perms;
+')
+
+########################################
+## <summary>
+##	Set attributes of character nodes on tmpfs filesystems.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain to not audit.
+##	</summary>
+## </param>
+#
+interface(`fs_setattr_tmpfs_chr_blk_files',`
+	gen_require(`
+		type tmpfs_t;
+	')
+
+	allow $1 tmpfs_t:chr_file setattr;
+')
+
+########################################
+## <summary>
 ##	Do not audit attempts to read and write character nodes on tmpfs filesystems.
 ## </summary>
 ## <param name="domain">
