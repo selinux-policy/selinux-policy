@@ -534,7 +534,8 @@ allow svirt_tcg_t self:capability sys_rawio;
 allow svirt_tcg_t self:process { execmem execstack };
 allow svirt_tcg_t self:netlink_route_socket r_netlink_socket_perms;
 
-allow svirt_tcg_t virtqemud_var_run_t: file write;
+allow svirt_tcg_t virtqemud_t:fifo_file read;
+allow svirt_tcg_t virtqemud_var_run_t:file write;
 
 read_files_pattern(svirt_tcg_t, virtqemud_t, virtqemud_t)
 
