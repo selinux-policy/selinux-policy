@@ -61,6 +61,7 @@ ifdef(`distro_suse',`
 /etc/securetty  	--  	gen_context(system_u:object_r:etc_runtime_t,s0)
 
 /etc/mdevctl\.d(/.*)?		gen_context(system_u:object_r:mdevctl_conf_t,s0)
+/etc/mdevctl\.d/scripts\.d/(/.*)?		gen_context(system_u:object_r:bin_t,s0)
 /etc/sysctl\.conf(\.old)?               --      gen_context(system_u:object_r:system_conf_t,s0)
 /etc/sysctl\.d(/.*)?		gen_context(system_u:object_r:system_conf_t,s0)
 /etc/sysconfig/ebtables.*				--      gen_context(system_u:object_r:system_conf_t,s0)
