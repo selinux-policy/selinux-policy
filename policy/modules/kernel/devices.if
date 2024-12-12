@@ -2974,6 +2974,24 @@ interface(`dev_rw_sev',`
 	rw_chr_files_pattern($1, device_t, sev_device_t)
 ')
 
+########################################
+## <summary>
+##	Settattr on sev devices.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`dev_setattr_sev',`
+	gen_require(`
+		type device_t, sev_device_t;
+	')
+
+	setattr_chr_files_pattern($1, device_t, sev_device_t)
+')
+
 ######################################
 ## <summary>
 ##	Read the lirc device.
