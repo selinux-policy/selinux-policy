@@ -4662,3 +4662,58 @@ interface(`kernel_secretmem_use',`
 	')
 	allow $1 secretmem_t:anon_inode create;
 ')
+
+########################################
+## <summary>
+##	Set up type transition for KVM guest memfd anon inodes.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain to receive the type transition.
+##	</summary>
+## </param>
+#
+interface(`kernel_kvm_gmem_domtrans',`
+	gen_require(`
+		type kvm_gmem_t;
+	')
+	type_transition $1 self:anon_inode kvm_gmem_t "[kvm-gmem]";
+')
+
+########################################
+## <summary>
+##	Allow the domain to use the KVM guest memfd interface via an
+##	inherited file descriptor.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`kernel_kvm_gmem_use_inherited',`
+	gen_require(`
+		type kvm_gmem_t;
+	')
+	# Not sure about the set of reachable permissions here -
+	# may be refined in the future to a smaller/bigger set.
+	allow $1 kvm_gmem_t:anon_inode { getattr read write map };
+')
+
+########################################
+## <summary>
+##	Allow the domain to use the KVM guest memfd interface.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`kernel_kvm_gmem_use',`
+	gen_require(`
+		type kvm_gmem_t;
+	')
+	kernel_kvm_gmem_use_inherited($1)
+	allow $1 kvm_gmem_t:anon_inode create;
+')
