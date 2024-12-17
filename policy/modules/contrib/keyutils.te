@@ -22,9 +22,7 @@ allow keyutils_request_t keyutils_request_exec_t:file execute_no_trans;
 
 corecmd_exec_bin(keyutils_request_t)
 
-domain_read_view_all_domains_keyrings(keyutils_request_t)
-
-init_write_key(keyutils_request_t)
+domain_manage_all_domains_keyrings(keyutils_request_t)
 
 optional_policy(`
 	init_search_pid_dirs(keyutils_request_t)
