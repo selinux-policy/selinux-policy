@@ -1222,6 +1222,7 @@ kernel_dgram_send(systemd_generator)
 dev_rw_crypto(systemd_generator)
 
 fs_getattr_all_fs(systemd_generator)
+fs_getattr_nsfs_files(systemd_generator)
 fs_search_all(systemd_generator)
 
 logging_stream_connect_syslog(systemd_generator)
@@ -1398,6 +1399,7 @@ dev_read_urand(systemd_domain)
 
 fs_search_all(systemd_domain)
 fs_getattr_all_fs(systemd_domain)
+fs_getattr_nsfs_files(systemd_domain)
 
 files_read_etc_files(systemd_domain)
 files_read_etc_runtime_files(systemd_domain)
