@@ -2109,11 +2109,10 @@ allow virtqemud_t self:bpf { map_create map_read map_write prog_load prog_run };
 allow virtqemud_t self:capability { audit_write chown dac_override dac_read_search fowner fsetid kill net_admin setpcap setgid setuid sys_admin sys_chroot sys_ptrace sys_rawio sys_resource };
 allow virtqemud_t self:capability2 { bpf perfmon };
 allow virtqemud_t self:cap_userns kill;
-
 allow virtqemud_t self:netlink_audit_socket { nlmsg_relay read write };
 allow virtqemud_t self:process { setcap setexec setrlimit setsched setsockcreate };
 allow virtqemud_t self:tcp_socket create_socket_perms;
-allow virtqemud_t self:tun_socket create;
+allow virtqemud_t self:tun_socket { create relabelfrom relabelto };
 allow virtqemud_t self:udp_socket { connect create getattr };
 
 allow virtqemud_t qemu_var_run_t:{ dir file sock_file } relabelfrom;
@@ -2121,8 +2120,10 @@ allow virtqemud_t qemu_var_run_t:{ dir file sock_file } relabelfrom;
 allow virtqemud_t svirt_t:process { getattr setsched signal signull transition };
 allow virtqemud_t svirt_t:unix_stream_socket { connectto create_stream_socket_perms };
 allow virtqemud_t svirt_socket_t:unix_stream_socket connectto;
-allow virtqemud_t svirt_tcg_t: process { setsched signal signull transition };
+allow virtqemud_t svirt_tcg_t: process { getrlimit getsched setsched signal signull transition };
 allow virtqemud_t svirt_tcg_t: unix_stream_socket { connectto create_stream_socket_perms };
+allow virtqemud_t svirt_tcg_t:file read_file_perms;
+allow virtqemud_t svirt_tcg_t:lnk_file read_lnk_file_perms;
 
 allow virtqemud_t svirt_devpts_t:chr_file open;
 allow virtqemud_t svirt_tmpfs_t:file { map write };
@@ -2178,7 +2179,6 @@ manage_files_pattern(virtqemud_t, svirt_image_t, svirt_image_t)
 manage_sock_files_pattern(virtqemud_t, svirt_image_t, svirt_image_t)
 read_files_pattern(virtqemud_t, svirt_t, svirt_t)
 read_lnk_files_pattern(virtqemud_t, svirt_t, svirt_t)
-read_files_pattern(virtqemud_t, svirt_tcg_t, svirt_tcg_t)
 
 manage_files_pattern(virtqemud_t, virt_content_t, virt_content_t)
 
@@ -2276,6 +2276,10 @@ optional_policy(`
 
 optional_policy(`
 	dnsmasq_filetrans_named_content_fromdir(virtqemud_t, virtqemud_var_run_t)
+')
+
+optional_policy(`
+	numad_domtrans(virtqemud_t)
 ')
 
 optional_policy(`
