@@ -573,6 +573,7 @@ optional_policy(`
     systemd_allow_create_mount_dir(init_t)
     systemd_hostnamed_delete_config(init_t)
 	systemd_manage_conf_files(init_t)
+	systemd_rw_networkd_tmpfs_files(init_t)
 ')
 
 optional_policy(`
