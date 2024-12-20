@@ -30,6 +30,10 @@ optional_policy(`
 	optional_policy(`
 		policykit_dbus_chat(powerprofiles_t)
 	')
+
+	optional_policy(`
+		xserver_dbus_chat_xdm(powerprofiles_t)
+	')
 ')
 
 optional_policy(`
