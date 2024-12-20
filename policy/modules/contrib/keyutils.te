@@ -25,7 +25,7 @@ corecmd_exec_bin(keyutils_request_t)
 domain_manage_all_domains_keyrings(keyutils_request_t)
 
 optional_policy(`
-	auth_read_passwd(keyutils_request_t)
+	auth_dontaudit_read_passwd_file(keyutils_request_t)
 ')
 
 optional_policy(`
