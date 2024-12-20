@@ -629,6 +629,7 @@ corenet_udp_bind_dhcpc_port(systemd_networkd_t)
 corenet_tcp_bind_dhcpd_port(systemd_networkd_t)
 corenet_udp_bind_dhcpd_port(systemd_networkd_t)
 
+fs_list_cgroup_dirs(systemd_networkd_t)
 fs_read_xenfs_files(systemd_networkd_t)
 fs_read_nsfs_files(systemd_networkd_t)
 fs_cgroup_write_memory_pressure(systemd_networkd_t)
