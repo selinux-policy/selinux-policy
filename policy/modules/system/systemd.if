@@ -2736,6 +2736,24 @@ interface(`systemd_networkd_watch_pid_dirs',`
 
 ########################################
 ## <summary>
+##	Read and write to systemd-networkd tmpfs files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`systemd_rw_networkd_tmpfs_files',`
+	gen_require(`
+		type systemd_networkd_tmpfs_t;
+	')
+
+	allow $1 systemd_networkd_tmpfs_t:file rw_file_perms;
+')
+
+########################################
+## <summary>
 ##	Mmap systemd_resolved_exec_t files.
 ## </summary>
 ## <param name="domain">
