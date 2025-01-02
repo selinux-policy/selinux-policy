@@ -2141,3 +2141,22 @@ interface(`virt_manage_qemu_pid_sock_files',`
        files_search_pids($1)
        manage_sock_files_pattern($1, qemu_var_run_t, qemu_var_run_t)
 ')
+
+########################################
+## <summary>
+##	Allow the specified domain to ioctl
+##	virtqemud over a unix domain stream socket.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed access.
+## </summary>
+## </param>
+#
+interface(`virt_virtqemud_ioctl_stream_sockets',`
+	gen_require(`
+		type virtqemud_t;
+	')
+
+	allow $1 virtqemud_t:unix_stream_socket ioctl;
+')
