@@ -6791,6 +6791,24 @@ interface(`dev_read_sgx_vepc',`
 
 ########################################
 ## <summary>
+##	Allow read and write the sgx_vepc devices
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`dev_rw_sgx_vepc',`
+	gen_require(`
+		type device_t, sgx_vepc_device_t;
+	')
+
+	rw_chr_files_pattern($1, device_t, sgx_vepc_device_t)
+')
+
+########################################
+## <summary>
 ##	Allow read the hfi1_[0-9]+ devices
 ## </summary>
 ## <param name="domain">
