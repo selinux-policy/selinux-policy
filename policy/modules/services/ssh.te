@@ -272,6 +272,10 @@ optional_policy(`
 ')
 
 optional_policy(`
+	virt_virtqemud_ioctl_stream_sockets(ssh_t)
+')
+
+optional_policy(`
 	xserver_user_x_domain_template(ssh, ssh_t, ssh_tmpfs_t)
 	xserver_domtrans_xauth(ssh_t)
 	xserver_map_user_fonts(ssh_t)
