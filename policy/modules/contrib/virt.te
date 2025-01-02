@@ -2151,7 +2151,7 @@ files_lock_filetrans(virtqemud_t, virtqemud_lock_t, file)
 
 allow virtqemud_t virtqemud_var_run_t:dir relabelfrom;
 allow virtqemud_t virtqemud_var_run_t:sock_file relabelfrom;
-allow virtqemud_t virt_log_t:file relabelfrom;
+allow virtqemud_t virt_log_t:file relabel_file_perms;
 
 manage_dirs_pattern(virtqemud_t, virt_var_run_t, virt_var_run_t)
 manage_dirs_pattern(virtqemud_t, virtqemud_var_run_t, virtqemud_var_run_t)
