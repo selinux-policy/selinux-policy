@@ -2267,7 +2267,10 @@ tunable_policy(`virtqemud_use_execmem',`
 ')
 
 tunable_policy(`virt_use_nfs',`
+	fs_manage_nfs_dirs(virtqemud_t)
 	fs_manage_nfs_files(virtqemud_t)
+	fs_read_nfs_symlinks(virtqemud_t)
+	fs_mmap_nfs_files(virtqemud_t)
 ')
 
 optional_policy(`
