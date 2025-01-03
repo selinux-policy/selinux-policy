@@ -2285,6 +2285,10 @@ optional_policy(`
 ')
 
 optional_policy(`
+	numad_domtrans(virtqemud_t)
+')
+
+optional_policy(`
 	qemu_exec(virtqemud_t)
 ')
 
