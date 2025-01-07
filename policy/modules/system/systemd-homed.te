@@ -110,6 +110,7 @@ kernel_read_system_state(systemd_homed_t)
 dev_getattr_generic_blk_files(systemd_homed_t)
 dev_read_sysfs(systemd_homed_t)
 
+fs_get_xattr_fs_quotas(systemd_homed_t)
 fs_getattr_cgroup(systemd_homed_t)
 fs_getattr_xattr_fs(systemd_homed_t)
 fs_search_cgroup_dirs(systemd_homed_t)
