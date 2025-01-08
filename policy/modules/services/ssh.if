@@ -660,6 +660,24 @@ interface(`ssh_exec',`
 
 ########################################
 ## <summary>
+##	Send a generic signal to the ssh client domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed to transition.
+##	</summary>
+## </param>
+#
+interface(`ssh_signal_ssh',`
+	gen_require(`
+		type ssh_t, ssh_exec_t;
+	')
+
+	allow $1 ssh_t:process signal;
+')
+
+########################################
+## <summary>
 ##	Execute the ssh client in the ssh client domain.
 ## </summary>
 ## <param name="domain">

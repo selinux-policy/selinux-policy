@@ -2298,7 +2298,7 @@ optional_policy(`
 
 optional_policy(`
 	ssh_domtrans_ssh(virtqemud_t)
-	ssh_signal(virtqemud_t)
+	ssh_signal_ssh(virtqemud_t)
 ')
 
 optional_policy(`
