@@ -1293,6 +1293,7 @@ init_exec_script_files(systemd_rc_local_generator_t)
 ### ssh generator
 allow systemd_ssh_generator_t self:vsock_socket create;
 allow systemd_ssh_generator_t vsock_device_t:chr_file { read_chr_file_perms };
+allow systemd_ssh_generator_t systemd_unit_file_t:file { create_file_perms rw_file_perms };
 
 kernel_read_sysctl(systemd_ssh_generator_t)
 
