@@ -341,6 +341,7 @@ optional_policy(`
 optional_policy(`
 	cups_read_config(samba_bgqd_t)
 	cups_read_pid_files(samba_bgqd_t)
+	cups_stream_connect(samba_bgqd_t)
 ')
 
 optional_policy(`
