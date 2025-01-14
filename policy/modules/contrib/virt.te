@@ -2285,6 +2285,10 @@ optional_policy(`
 ')
 
 optional_policy(`
+	nbdkit_domtrans(virtqemud_t)
+')
+
+optional_policy(`
 	numad_domtrans(virtqemud_t)
 ')
 
