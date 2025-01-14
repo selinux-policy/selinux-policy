@@ -5,7 +5,8 @@
 /usr/libexec/dnf-utils	--	gen_context(system_u:object_r:debuginfo_exec_t,s0)
 /usr/bin/dnf			--	gen_context(system_u:object_r:rpm_exec_t,s0)
 /usr/bin/dnf-automatic  --  gen_context(system_u:object_r:rpm_exec_t,s0)
-/usr/bin/dnf-[0-9]+		--	gen_context(system_u:object_r:rpm_exec_t,s0)
+/usr/bin/dnf-3			--	gen_context(system_u:object_r:rpm_exec_t,s0)
+/usr/bin/dnf5			--	gen_context(system_u:object_r:rpm_exec_t,s0)
 /usr/bin/rpm 			--	gen_context(system_u:object_r:rpm_exec_t,s0)
 /usr/bin/rpmdb 			--	gen_context(system_u:object_r:rpmdb_exec_t,s0)
 /usr/bin/smart 			--	gen_context(system_u:object_r:rpm_exec_t,s0)
@@ -18,6 +19,8 @@
 /usr/lib/rpm/rpmdb_migrate	--	gen_context(system_u:object_r:rpmdb_exec_t,s0)
 
 # This is in /usr, but is expected to be variable content from a policy perspective (#2042149)
+/usr/lib/sysimage/dnf(/.*)?		gen_context(system_u:object_r:rpm_var_lib_t,s0)
+/usr/lib/sysimage/libdnf5(/.*)?		gen_context(system_u:object_r:rpm_var_lib_t,s0)
 /usr/lib/sysimage/rpm(/.*)?		gen_context(system_u:object_r:rpm_var_lib_t,s0)
 
 /usr/libexec/packagekitd	--	gen_context(system_u:object_r:rpm_exec_t,s0)
