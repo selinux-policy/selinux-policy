@@ -754,6 +754,10 @@ optional_policy(`
 ')
 
 optional_policy(`
+	nbdkit_domtrans(virtd_t)
+')
+
+optional_policy(`
     numad_domtrans(virtd_t)
     numad_dbus_chat(virtd_t)
 ')
