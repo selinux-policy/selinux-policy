@@ -1235,3 +1235,36 @@ interface(`corecmd_bin_filetrans',`
 
 	filetrans_pattern($1, bin_t, $2, $3, $4)
 ')
+
+########################################
+## <summary>
+##	Create objects with the bin_t type
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="file_type">
+##	<summary>
+##	The type of the object to be created
+##	</summary>
+## </param>
+## <param name="object_class">
+##	<summary>
+##	The object class.
+##	</summary>
+## </param>
+## <param name="name" optional="true">
+##	<summary>
+##	The name of the object being created.
+##	</summary>
+## </param>
+#
+interface(`corecmd_bin_filetrans_to',`
+	gen_require(`
+		type bin_t;
+	')
+
+	filetrans_pattern($1, $2, bin_t, $3, $4)
+')
