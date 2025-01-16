@@ -6139,6 +6139,24 @@ interface(`files_etc_filetrans_mdevctl_conf',`
 	filetrans_pattern($1, etc_t, mdevctl_conf_t, dir, "mdevctl.d")
 ')
 
+###################################
+## <summary>
+##	Create /etc/mdevctl.d/scripts.d with the bin_t type
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`files_etc_filetrans_mdevctl_conf_scripts',`
+	gen_require(`
+		type mdevctl_conf_t;
+	')
+
+	corecmd_bin_filetrans_to($1, mdevctl_conf_t, dir, "scripts.d")
+')
+
 #######################################
 ## <summary>
 ##  Read manageable system configuration files in /etc
