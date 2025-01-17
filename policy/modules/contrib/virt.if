@@ -2199,3 +2199,21 @@ interface(`virt_virtqemud_ioctl_stream_sockets',`
 
 	allow $1 virtqemud_t:unix_stream_socket ioctl;
 ')
+
+########################################
+## <summary>
+##	Execute virsh in the caller domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`virt_exec_virsh',`
+	gen_require(`
+		type virsh_exec_t;
+	')
+
+	can_exec($1, virsh_exec_t)
+')
