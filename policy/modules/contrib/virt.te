@@ -112,8 +112,14 @@ gen_tunable(virt_use_pcscd, false)
 
 ## <desc>
 ## <p>
-## Allow sandbox containers to send audit messages
+## Allow confined virtual guests to use pulseaudio
+## </p>
+## </desc>
+gen_tunable(virt_use_pulseaudio, false)
 
+## <desc>
+## <p>
+## Allow sandbox containers to send audit messages
 ## </p>
 ## </desc>
 gen_tunable(virt_sandbox_use_audit, true)
@@ -1251,6 +1257,14 @@ optional_policy(`
 optional_policy(`
 	tunable_policy(`virt_use_xserver',`
 		xserver_stream_connect(virt_domain)
+	')
+')
+
+optional_policy(`
+	tunable_policy(`virt_use_pulseaudio',`
+		pulseaudio_read_home_files(virt_domain)
+		unconfined_stream_connect(virt_domain)
+		userdom_stream_connect(virt_domain)
 	')
 ')
 
