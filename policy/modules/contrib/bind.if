@@ -44,6 +44,25 @@ interface(`bind_systemctl',`
 
 ########################################
 ## <summary>
+##	Execute ndc in the caller domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`bind_exec_ndc',`
+	gen_require(`
+		type ndc_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	can_exec($1, ndc_exec_t)
+')
+
+########################################
+## <summary>
 ##	Execute ndc in the ndc domain.
 ## </summary>
 ## <param name="domain">
