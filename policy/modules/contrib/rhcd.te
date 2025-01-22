@@ -147,10 +147,10 @@ optional_policy(`
 	gpg_domtrans(rhcd_t)
 ')
 
-optional_policy(`
-	insights_client_domtrans(rhcd_t)
-	insights_client_read_config(rhcd_t)
-')
+#optional_policy(`
+##	insights_client_domtrans(rhcd_t)
+##	insights_client_read_config(rhcd_t)
+#')
 
 optional_policy(`
  	logging_domtrans_auditctl(rhcd_t)

@@ -292,6 +292,7 @@ optional_policy(`
 optional_policy(`
 	#gpg_exec(insights_client_t)
 	gpg_domtrans(insights_client_t)
+	gpg_read_user_secrets(insights_client_t)
 
 	gpg_agent_stream_connect(insights_client_t)
 	gpg_domtrans_agent(insights_client_t)

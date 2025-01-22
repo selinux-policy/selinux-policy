@@ -185,10 +185,11 @@ optional_policy(`
 
 optional_policy(`
 	insights_client_read_config(gpg_t)
-	insights_client_manage_lib_files(gpg_t)
-	insights_client_write_lib_sock_files(gpg_t)
-	insights_client_read_tmp(gpg_t)
-	insights_client_write_tmp(gpg_t)
+	insights_client_read_lib_files(gpg_t)
+#	insights_client_manage_lib_files(gpg_t)
+#	insights_client_write_lib_sock_files(gpg_t)
+#	insights_client_read_tmp(gpg_t)
+#	insights_client_write_tmp(gpg_t)
 ')
 
 optional_policy(`
@@ -347,12 +348,12 @@ optional_policy(`
 	gnome_manage_config(gpg_agent_t)
 ')
 
-optional_policy(`
-	insights_client_manage_lib_dirs(gpg_agent_t)
-	insights_client_manage_lib_files(gpg_agent_t)
-	insights_client_manage_lib_sock_files(gpg_agent_t)
-')
-
+#optional_policy(`
+#	insights_client_manage_lib_dirs(gpg_agent_t)
+#	insights_client_manage_lib_files(gpg_agent_t)
+#	insights_client_manage_lib_sock_files(gpg_agent_t)
+#')
+#
 optional_policy(`
 	mozilla_dontaudit_rw_user_home_files(gpg_agent_t)
 ')
