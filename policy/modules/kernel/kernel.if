@@ -4161,6 +4161,25 @@ interface(`kernel_read_security_state_symlinks',`
 
 ########################################
 ## <summary>
+##	Allow caller to write nmi_watchdog state information.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+##
+#
+interface(`kernel_write_nmi_watchdog_state',`
+	gen_require(`
+		type sysctl_t, sysctl_kernel_t, sysctl_nmi_watchdog_t;
+	')
+
+	write_files_pattern($1, { proc_t sysctl_t sysctl_kernel_t }, sysctl_nmi_watchdog_t)
+')
+
+########################################
+## <summary>
 ##	Access unlabeled infiniband pkeys.
 ## </summary>
 ## <param name="domain">

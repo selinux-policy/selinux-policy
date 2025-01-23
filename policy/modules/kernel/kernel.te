@@ -187,6 +187,11 @@ type sysctl_kernel_t, sysctl_type;
 fs_associate(sysctl_kernel_t)
 genfscon proc /sys/kernel gen_context(system_u:object_r:sysctl_kernel_t,s0)
 
+# /proc/sys/kernel/nmi_watchdog
+type sysctl_nmi_watchdog_t, sysctl_type;
+fs_associate(sysctl_nmi_watchdog_t)
+genfscon proc /sys/kernel/nmi_watchdog gen_context(system_u:object_r:sysctl_nmi_watchdog_t,s0)
+
 # /sys/kernel/ns_last_pid file
 type sysctl_kernel_ns_last_pid_t, sysctl_type;
 fs_associate(sysctl_kernel_ns_last_pid_t)
