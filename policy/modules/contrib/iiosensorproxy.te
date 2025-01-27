@@ -33,5 +33,9 @@ optional_policy(`
 ')
 
 optional_policy(`
+	logging_stream_connect_syslog(iiosensorproxy_t)
+')
+
+optional_policy(`
 	udev_read_pid_files(iiosensorproxy_t)
 ')
