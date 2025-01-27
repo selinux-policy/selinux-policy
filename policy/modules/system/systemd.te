@@ -1229,7 +1229,10 @@ fs_getattr_all_fs(systemd_generator)
 fs_getattr_nsfs_files(systemd_generator)
 fs_search_all(systemd_generator)
 
-logging_stream_connect_syslog(systemd_generator)
+optional_policy(`
+	logging_dgram_send(systemd_generator)
+	logging_stream_connect_syslog(systemd_generator)
+')
 
 #######################################
 #
