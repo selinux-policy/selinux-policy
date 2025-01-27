@@ -17,6 +17,7 @@ allow pcmsensor_t self:process { ptrace setrlimit };
 
 kernel_read_proc_files(pcmsensor_t)
 kernel_read_debugfs(pcmsensor_t)
+kernel_write_nmi_watchdog_state(pcmsensor_t)
 
 dev_rw_cpu_microcode(pcmsensor_t)
 # /sys/module/msr/parameters/allow_writes
