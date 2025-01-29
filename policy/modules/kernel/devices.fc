@@ -54,6 +54,7 @@
 /dev/hwrng		-c	gen_context(system_u:object_r:random_device_t,s0)
 /dev/gpiochip[0-9]+		-c	gen_context(system_u:object_r:gpio_device_t,s0)
 /dev/i915		-c	gen_context(system_u:object_r:dri_device_t,s0)
+/dev/iio:device[0-9]+	-c	gen_context(system_u:object_r:iio_device_t,s0)
 /dev/inportbm		-c	gen_context(system_u:object_r:mouse_device_t,s0)
 /dev/infiniband/.*	-c	gen_context(system_u:object_r:infiniband_device_t,mls_systemhigh)
 /dev/infiniband/issm[0-9]+		-c	gen_context(system_u:object_r:infiniband_mgmt_device_t,mls_systemhigh)
