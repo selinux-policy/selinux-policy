@@ -165,6 +165,12 @@ type hfi1_device_t;
 dev_node(hfi1_device_t)
 
 #
+# Type for /dev/iio:device[0-9]+
+#
+type iio_device_t;
+dev_node(iio_device_t)
+
+#
 # Type for /dev/ipmi/0
 #
 type ipmi_device_t;
