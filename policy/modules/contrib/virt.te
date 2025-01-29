@@ -559,6 +559,10 @@ ps_process_pattern(svirt_tcg_t, virtd_t)
 
 virt_dontaudit_read_state(svirt_tcg_t)
 
+optional_policy(`
+	nbdkit_stream_connect(svirt_tcg_t)
+')
+
 ########################################
 #
 # virtd local policy
