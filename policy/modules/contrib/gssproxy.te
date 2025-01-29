@@ -8,6 +8,7 @@ policy_module(gssproxy, 1.0.0)
 type gssproxy_t;
 type gssproxy_exec_t;
 init_daemon_domain(gssproxy_t, gssproxy_exec_t)
+init_nnp_daemon_domain(gssproxy_t)
 
 type gssproxy_var_lib_t;
 files_type(gssproxy_var_lib_t)
