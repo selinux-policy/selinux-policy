@@ -6270,6 +6270,25 @@ interface(`fs_manage_tmpfs_sockets',`
 
 	manage_sock_files_pattern($1, tmpfs_t, tmpfs_t)
 ')
+ 
+########################################
+## <summary>
+##	Write to socket files on tmpfs filesystems.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`fs_write_tmpfs_socket_files',`
+	gen_require(`
+		type tmpfs_t;
+	')
+
+	write_sock_files_pattern($1, tmpfs_t, tmpfs_t)
+	fs_search_tmpfs($1)
+')
 
 ########################################
 ## <summary>
