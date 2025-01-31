@@ -203,3 +203,8 @@ optional_policy(`
 optional_policy(`
     systemd_userdbd_stream_connect(rhsmcertd_t)
 ')
+
+optional_policy(`
+	virt_read_pid_files(rhsmcertd_t)
+	virt_signal(rhsmcertd_t)
+')
