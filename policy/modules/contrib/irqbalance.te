@@ -5,6 +5,13 @@ policy_module(irqbalance, 1.6.0)
 # Declarations
 #
 
+## <desc>
+## <p>
+## Allow irqbalance to run unconfined scripts
+## </p>
+## </desc>
+gen_tunable(irqbalance_run_unconfined, false)
+
 type irqbalance_t;
 type irqbalance_exec_t;
 init_daemon_domain(irqbalance_t, irqbalance_exec_t)
@@ -12,6 +19,12 @@ init_nnp_daemon_domain(irqbalance_t)
 
 type irqbalance_initrc_exec_t;
 init_script_file(irqbalance_initrc_exec_t)
+
+
+type irqbalance_unconfined_script_t;
+type irqbalance_unconfined_script_exec_t;
+role system_r types irqbalance_unconfined_script_t;
+application_domain(irqbalance_unconfined_script_t, irqbalance_unconfined_script_exec_t)
 
 type irqbalance_var_run_t;
 files_pid_file(irqbalance_var_run_t)
@@ -61,4 +74,20 @@ optional_policy(`
 
 optional_policy(`
 	udev_read_db(irqbalance_t)
+')
+
+########################################
+#
+# irqbalance_unconfined_script_t local policy
+#
+
+tunable_policy(`irqbalance_run_unconfined',`
+	domtrans_pattern(irqbalance_t, irqbalance_unconfined_script_exec_t, irqbalance_unconfined_script_t)
+	#allow irqbalance_t irqbalance_unconfined_script_t:process2 nnp_transition;
+',`
+	can_exec(irqbalance_t, irqbalance_unconfined_script_exec_t)
+')
+
+optional_policy(`
+	unconfined_domain(irqbalance_unconfined_script_t)
 ')
