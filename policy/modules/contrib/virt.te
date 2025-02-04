@@ -540,6 +540,8 @@ allow svirt_tcg_t self:capability sys_rawio;
 allow svirt_tcg_t self:process { execmem execstack };
 allow svirt_tcg_t self:netlink_route_socket r_netlink_socket_perms;
 
+allow svirt_tcg_t svirt_image_t:blk_file map;
+
 allow svirt_tcg_t virtqemud_t:fifo_file read;
 allow svirt_tcg_t virtqemud_var_run_t:file write;
 
@@ -2196,6 +2198,7 @@ manage_files_pattern(virtqemud_t, qemu_var_run_t, qemu_var_run_t)
 manage_sock_files_pattern(virtqemud_t, qemu_var_run_t, qemu_var_run_t)
 filetrans_pattern(virtqemud_t, virt_var_run_t, qemu_var_run_t, dir, "qemu")
 
+allow virtqemud_t svirt_image_t:blk_file setattr;
 rw_blk_files_pattern(virtqemud_t, svirt_image_t, svirt_image_t)
 rw_chr_files_pattern(virtqemud_t, svirt_image_t, svirt_image_t)
 setattr_chr_files_pattern(virtqemud_t, svirt_image_t, svirt_image_t)
@@ -2266,6 +2269,7 @@ fs_delete_tmpfs_files(virtqemud_t)
 fs_manage_hugetlbfs_dirs(virtqemud_t)
 fs_manage_cgroup_dirs(virtqemud_t)
 fs_manage_cgroup_files(virtqemud_t)
+fs_manage_tmpfs_blk_files(virtqemud_t)
 fs_manage_tmpfs_chr_files(virtqemud_t)
 fs_manage_tmpfs_dirs(virtqemud_t)
 fs_manage_tmpfs_symlinks(virtqemud_t)
