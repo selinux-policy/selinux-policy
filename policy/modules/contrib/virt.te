@@ -2187,6 +2187,7 @@ manage_files_pattern(virtqemud_t, qemu_var_run_t, qemu_var_run_t)
 manage_sock_files_pattern(virtqemud_t, qemu_var_run_t, qemu_var_run_t)
 filetrans_pattern(virtqemud_t, virt_var_run_t, qemu_var_run_t, dir, "qemu")
 
+allow virtqemud_t svirt_image_t:file map;
 allow virtqemud_t svirt_image_t:blk_file setattr;
 rw_blk_files_pattern(virtqemud_t, svirt_image_t, svirt_image_t)
 rw_chr_files_pattern(virtqemud_t, svirt_image_t, svirt_image_t)
