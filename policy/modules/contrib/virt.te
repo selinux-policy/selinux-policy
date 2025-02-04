@@ -2288,6 +2288,11 @@ tunable_policy(`virt_use_nfs',`
 	fs_mmap_nfs_files(virtqemud_t)
 ')
 
+tunable_policy(`virt_use_usb',`
+	dev_rw_generic_usb_dev(virtqemud_t)
+	dev_setattr_generic_usb_dev(virtqemud_t)
+')
+
 optional_policy(`
 	dmidecode_domtrans(virtqemud_t)
 ')
