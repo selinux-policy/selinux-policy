@@ -2078,6 +2078,10 @@ optional_policy(`
 ')
 
 optional_policy(`
+	firewalld_dbus_chat(virtnwfilterd_t)
+')
+
+optional_policy(`
 	iptables_domtrans(virtnwfilterd_t)
 	iptables_filetrans_named_content(virtnwfilterd_t)
 	iptables_read_var_run(virtnwfilterd_t)
