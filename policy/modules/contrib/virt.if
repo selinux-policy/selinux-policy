@@ -2181,3 +2181,22 @@ interface(`virt_virtqemud_ioctl_stream_sockets',`
 
 	allow $1 virtqemud_t:unix_stream_socket ioctl;
 ')
+
+########################################
+## <summary>
+##	Allow the specified domain read and write
+##	to virtqemud unix stream sockets.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`virt_rw_stream_sockets_virtqemud',`
+	gen_require(`
+		type virtqemud_t;
+	')
+
+	allow $1 virtqemud_t:unix_stream_socket { read write };
+')
