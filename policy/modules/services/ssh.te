@@ -272,6 +272,7 @@ optional_policy(`
 ')
 
 optional_policy(`
+	virt_rw_stream_sockets_virtqemud(ssh_t)
 	virt_virtqemud_ioctl_stream_sockets(ssh_t)
 ')
 
