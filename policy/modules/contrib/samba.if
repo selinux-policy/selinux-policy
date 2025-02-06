@@ -1102,7 +1102,7 @@ interface(`samba_admin',`
 
 ########################################
 ## <summary>
-##	Execute winbind rpcd in the winbind_rpcd_t domain.
+##	Execute winbind rpcd in the samba_dcerpcd_t domain.
 ## </summary>
 ## <param name="domain">
 ##	<summary>
@@ -1112,11 +1112,11 @@ interface(`samba_admin',`
 #
 interface(`samba_domtrans_winbind_rpcd',`
 	gen_require(`
-		type winbind_rpcd_t, winbind_rpcd_exec_t;
+		type samba_dcerpcd_t, samba_dcerpcd_exec_t;
 	')
 
 	corecmd_search_bin($1)
-	domtrans_pattern($1, winbind_rpcd_exec_t, winbind_rpcd_t)
+	domtrans_pattern($1, samba_dcerpcd_exec_t, samba_dcerpcd_t)
 ')
 
 ########################################
