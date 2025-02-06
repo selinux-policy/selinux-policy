@@ -262,6 +262,7 @@ kernel_load_module(init_t)
 kernel_read_all_proc(init_t)
 kernel_list_all_proc(init_t)
 kernel_mounton_all_proc(init_t)
+kernel_mounton_crypto_sysctl_files(init_t)
 
 # There is bug in kernel in 4.16 where lot of domains requesting module_request, for now dontauditing
 kernel_dontaudit_request_load_module(init_t)
