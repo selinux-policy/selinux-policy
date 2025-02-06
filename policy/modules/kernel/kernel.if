@@ -2217,6 +2217,24 @@ interface(`kernel_read_crypto_sysctls',`
 
 ########################################
 ## <summary>
+##	Allow the specified domain mounton crypto sysctl files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`kernel_mounton_crypto_sysctl_files',`
+	gen_require(`
+		type sysctl_crypto_t;
+	')
+
+	allow $1 sysctl_crypto_t:file mounton;
+')
+
+########################################
+## <summary>
 ##	Read general kernel sysctls.
 ## </summary>
 ## <desc>
