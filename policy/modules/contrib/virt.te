@@ -517,7 +517,6 @@ corenet_udp_bind_all_ports(svirt_t)
 corenet_tcp_bind_all_ports(svirt_t)
 corenet_tcp_connect_all_ports(svirt_t)
 
-dev_read_sysfs(svirt_t)
 dev_rw_dma_dev(svirt_t)
 
 init_dontaudit_read_state(svirt_t)
@@ -1143,6 +1142,7 @@ dev_dontaudit_getattr_all(virt_domain)
 dev_read_generic_symlinks(virt_domain)
 dev_read_rand(virt_domain)
 dev_read_sound(virt_domain)
+dev_read_sysfs(virt_domain)
 dev_read_urand(virt_domain)
 dev_write_sound(virt_domain)
 dev_rw_ksm(virt_domain)
@@ -1228,7 +1228,6 @@ tunable_policy(`virt_use_samba',`
 
 tunable_policy(`virt_use_usb',`
 	dev_rw_usbfs(virt_domain)
-	dev_read_sysfs(virt_domain)
 	fs_getattr_dos_fs(virt_domain)
 	fs_manage_dos_dirs(virt_domain)
 	fs_manage_dos_files(virt_domain)
