@@ -472,9 +472,12 @@ interface(`init_ranged_system_domain',`
 interface(`init_explicit_domain',`
 	gen_require(`
 		type init_t;
+		attribute daemon, direct_init_entry;
 		role system_r;
 	')
 
+	typeattribute $1 daemon;
+	typeattribute $2 direct_init_entry;
 	role system_r types $1;
 
 	domain_type($1)
