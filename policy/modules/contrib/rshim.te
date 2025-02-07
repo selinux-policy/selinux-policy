@@ -1,4 +1,4 @@
-policy_module(rshim, 1.0.0)
+policy_module(rshim, 1.0.1)
 
 ########################################
 #
@@ -15,6 +15,23 @@ files_pid_file(rshim_var_run_t)
 type rshim_unit_file_t;
 systemd_unit_file(rshim_unit_file_t)
 
+gen_require(`
+    type kernel_t;
+    type sysfs_t;
+    type tty_device_t;
+    type tun_tap_device_t;
+    type userio_device_t;
+    type var_run_t;
+
+    class capability { ipc_lock sys_admin net_admin };
+    class chr_file { open read write ioctl map };
+    class dir { write remove_name add_name search };
+    class file { read write open lock ioctl unlink create map };
+    class system module_request;
+    class tun_socket create;
+    class udp_socket { create ioctl };
+')
+
 ########################################
 #
 # rshim local policy
@@ -26,6 +43,16 @@ allow rshim_t self:process { fork };
 allow rshim_t self:system module_load;
 allow rshim_t self:unix_stream_socket create_stream_socket_perms;
 allow rshim_t self:netlink_kobject_uevent_socket getopt;
+allow rshim_t kernel_t:system module_request;
+allow rshim_t rshim_t:tun_socket create;
+allow rshim_t self:capability {ipc_lock net_admin sys_admin};
+allow rshim_t self:udp_socket { create ioctl };
+allow rshim_t sysfs_t:file { write open map };
+allow rshim_t tty_device_t:chr_file { open read write ioctl map };
+allow rshim_t tun_tap_device_t:chr_file { open read write ioctl map };
+allow rshim_t userio_device_t:chr_file { open read write ioctl map };
+allow rshim_t var_run_t:dir { write remove_name add_name search };
+allow rshim_t var_run_t:file { read write open lock ioctl unlink create map };
 
 manage_files_pattern(rshim_t, rshim_var_run_t, rshim_var_run_t)
 files_pid_filetrans(rshim_t, rshim_var_run_t, file)
