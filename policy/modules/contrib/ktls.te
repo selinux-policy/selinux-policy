@@ -14,6 +14,14 @@ permissive ktlshd_t;
 allow ktlshd_t self:netlink_generic_socket create_socket_perms;
 allow ktlshd_t self:unix_dgram_socket create_socket_perms;
 
+kernel_read_proc_files(ktlshd_t)
+
+domain_read_view_all_domains_keyrings(ktlshd_t)
+
+optional_policy(`
+	init_write_key(ktlshd_t)
+')
+
 optional_policy(`
 	logging_send_syslog_msg(ktlshd_t)
 ')
