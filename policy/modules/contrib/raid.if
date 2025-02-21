@@ -203,11 +203,13 @@ interface(`raid_create_conf_dirs',`
 interface(`raid_filetrans_named_content',`
 	gen_require(`
 		type mdadm_conf_t;
+		type mdadm_var_run_t;
 	')
 
     files_etc_filetrans($1, mdadm_conf_t, file, "mdadm.conf")
     files_etc_filetrans($1, mdadm_conf_t, file, "mdadm.conf.anacbak")
     files_etc_filetrans($1, mdadm_conf_t, dir, "mdadm.conf.d")
+    files_pid_filetrans($1, mdadm_var_run_t, dir, "mdadm")
 ')
 
 ########################################
