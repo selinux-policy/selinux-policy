@@ -1,39 +1,53 @@
-## <summary>policy for rshim</summary>
-
-########################################
-## <summary>
-##	Execute rshim_exec_t in the rshim domain.
-## </summary>
-## <param name="domain">
-## <summary>
-##	Domain allowed to transition.
-## </summary>
-## </param>
-#
-interface(`rshim_domtrans',`
-	gen_require(`
-		type rshim_t, rshim_exec_t;
-	')
-
-	corecmd_search_bin($1)
-	domtrans_pattern($1, rshim_exec_t, rshim_t)
+interface(`rshim_use_tun_socket', `
+    allow $1 $1:tun_socket create;
 ')
 
-######################################
-## <summary>
-##	Execute rshim in the caller domain.
-## </summary>
-## <param name="domain">
-##	<summary>
-##	Domain allowed access.
-##	</summary>
-## </param>
-#
-interface(`rshim_exec',`
-	gen_require(`
-		type rshim_exec_t;
-	')
+interface(`rshim_netlink_uevent', `
+    allow $1 self:netlink_kobject_uevent_socket { getopt bind create getattr setopt };
+')
 
-	corecmd_search_bin($1)
-	can_exec($1, rshim_exec_t)
+interface(`rshim_fork_process', `
+    allow $1 self:process { fork };
+')
+
+interface(`rshim_use_udp_socket', `
+    allow $1 self:udp_socket { create ioctl };
+')
+
+interface(`rshim_use_unix_stream_socket', `
+    allow $1 self:unix_stream_socket create_stream_socket_perms;
+')
+
+interface(`rshim_access_sysfs', `
+    allow $1 sysfs_t:file { read write open map };
+    dev_read_sysfs($1)
+')
+
+interface(`rshim_use_tty_chr_file', `
+    allow $1 tty_device_t:chr_file { open read write ioctl map };
+')
+
+interface(`rshim_rw_tun_tap_device', `
+    allow $1 tun_tap_device_t:chr_file { open read write ioctl map };
+')
+
+interface(`rshim_rw_userio_device', `
+    allow $1 userio_device_t:chr_file { open read write ioctl map };
+')
+
+interface(`rshim_use_capabilities', `
+    allow $1 self:capability { ipc_lock net_admin sys_admin };
+')
+
+interface(`rshim_allow_bpf_capability', `
+    allow $1 self:capability2 bpf;
+')
+
+interface(`rshim_allow_modprobe', `
+    allow $1 modules_object_t:file getattr;
+    kernel_request_load_module(rshim_t)
+    modutils_exec_kmod(rshim_t)
+    modutils_getattr_module_deps(rshim_t)
+    modutils_read_module_config(rshim_t)
+    modutils_read_module_deps_files(rshim_t)
 ')

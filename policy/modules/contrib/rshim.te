@@ -1,4 +1,4 @@
-policy_module(rshim, 1.0.0)
+policy_module(rshim, 1.0.1)
 
 ########################################
 #
@@ -10,60 +10,92 @@ type rshim_exec_t;
 init_daemon_domain(rshim_t, rshim_exec_t)
 
 type rshim_var_run_t;
+
+# Configure the type as a PID file
 files_pid_file(rshim_var_run_t)
 
 type rshim_unit_file_t;
 systemd_unit_file(rshim_unit_file_t)
 
+require {
+	type sysfs_t;
+	type tty_device_t;
+	type tun_tap_device_t;
+	type udev_var_run_t;
+	type userio_device_t;
+}
+
 ########################################
 #
 # rshim local policy
 #
-allow rshim_t self:capability2 bpf;
-allow rshim_t self:fifo_file rw_fifo_file_perms;
-allow rshim_t self:netlink_kobject_uevent_socket { bind create getattr setopt };
-allow rshim_t self:process { fork };
-allow rshim_t self:system module_load;
-allow rshim_t self:unix_stream_socket create_stream_socket_perms;
-allow rshim_t self:netlink_kobject_uevent_socket getopt;
 
-manage_files_pattern(rshim_t, rshim_var_run_t, rshim_var_run_t)
-files_pid_filetrans(rshim_t, rshim_var_run_t, file)
+# Need to use kernel tun/tap device for rshim network interface
+rshim_use_tun_socket(rshim_t)
 
-kernel_read_proc_files(rshim_t)
+# Allow netlink socket ops for libusb_init() to monitor USB events via udev
+rshim_netlink_uevent(rshim_t)
 
+# rshim executible running in daemon mode needs fork()
+rshim_fork_process(rshim_t)
+
+# Need to modprobe: "cuse", "tun", "uio_pci_generic", "vfio-pci"
+rshim_allow_modprobe(rshim_t)
+
+# Access is needed to system configuration files that are managed by SSSD,
+# like 'ifup' called by rshim needs network configurations
+sssd_read_public_files(rshim_t)
+
+# bpf is needed for network interface packet filtering
+rshim_allow_bpf_capability(rshim_t)
+
+# rshim tmfifo network interface needs to support UDP and Unix stream socket
+rshim_use_udp_socket(rshim_t)
+rshim_use_unix_stream_socket(rshim_t)
+
+# rshim pcie functionality need r/w/mmap access to some sysfs nodes
+rshim_access_sysfs(rshim_t)
+
+# Needs tty permisstions to create /dev/rshim*/console
+rshim_use_tty_chr_file(rshim_t)
+
+# Need tun/tap device operation for rshim network interface
+rshim_rw_tun_tap_device(rshim_t)
+
+# Need UIO (Userspace I/O) for PCIe device access
+rshim_rw_userio_device(rshim_t)
+
+# sys_admin: Required for module loading
+# net_admin: Network interface management
+# ipc_lock: Shared memory locking
+rshim_use_capabilities(rshim_t)
+
+# rshim uses system() call to run "ifup" command
 corecmd_exec_shell(rshim_t)
 
-dev_read_sysfs(rshim_t)
-
+# Need to handle standard file descriptors (stdin/stdout/stderr) when
+# running in non-daemon mode (-f)
 domain_use_interactive_fds(rshim_t)
 
+# Need to manage PID file at /var/run/rshim.pid
+udev_read_pid_files(rshim_t)
+files_pid_filetrans(rshim_t, rshim_var_run_t, file)
+
+# Need to read /etc/rshim.conf
 files_read_etc_files(rshim_t)
-files_read_kernel_modules(rshim_t)
+
+# Need permissions to manage rshim_var_run_t files
+manage_files_pattern(rshim_t, rshim_var_run_t, rshim_var_run_t)
+
+# Need to read user/group information when changing
+# permissions and ownership of files it creates
+auth_read_passwd_file(rshim_t)
+
+# Need to read network interface info from /proc/net;
+# Need to check process status from /proc/[pid]
+kernel_read_proc_files(rshim_t)
 
 optional_policy(`
-	auth_read_passwd_file(rshim_t)
-')
-
-optional_policy(`
+	# Support syslog logging
 	logging_send_syslog_msg(rshim_t)
-')
-
-optional_policy(`
-	miscfiles_read_localization(rshim_t)
-')
-
-optional_policy(`
-	modutils_exec_kmod(rshim_t)
-	modutils_getattr_module_deps(rshim_t)
-	modutils_read_module_config(rshim_t)
-	modutils_read_module_deps_files(rshim_t)
-')
-
-optional_policy(`
-        sssd_read_public_files(rshim_t)
-')
-
-optional_policy(`
-	udev_read_pid_files(rshim_t)
 ')
